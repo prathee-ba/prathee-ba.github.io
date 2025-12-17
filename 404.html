@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script>
+    // Get the current path (e.g., /repo-name/some/invalid/path)
+    var path = window.location.pathname;
+
+    // The GitHub Pages base URL (e.g., /repo-name)
+    // Adjust 'your-repo-name' to your actual repository name. 
+    // If your project is hosted at the root (username.github.io), set this to ''
+    var baseRepo = ''; 
+
+    // Remove the base repository name from the path if it exists
+    if (baseRepo && path.startsWith(baseRepo)) {
+        path = path.substring(baseRepo.length);
+    }
+
+    // Build the new URL, routing to the Angular root route ('/')
+    // This allows Angular to take over and show the portfolio page.
+    var newLocation = window.location.protocol + "//" + window.location.host + baseRepo + '/';
+
+    // Replace the current history entry to prevent the user from hitting the broken URL again
+    window.history.replaceState(null, null, newLocation);
+    
+    // Redirect to the new location (which is the root URL of your app)
+    window.location.replace(newLocation);
+  </script>
+</head>
+<body>
+  <p>If you are not redirected automatically, follow this <a href="/">link to the homepage</a>.</p>
+</body>
+</html>
